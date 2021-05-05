@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SheepSpawner : MonoBehaviour
 {
-    public bool canSpawn = true; // 1
-    public GameObject sheepPrefab; // 2
-    public List<Transform> sheepSpawnPositions = new List<Transform>(); // 3
+    public bool canSpawn = true;
+    public GameObject sheepPrefab;
+    public List<Transform> sheepSpawnPositions = new List<Transform>();
     public float timeBetweenSpawns;
-    private List<GameObject> sheepList = new List<GameObject>(); // 5
+    private List<GameObject> sheepList = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -24,18 +24,18 @@ public class SheepSpawner : MonoBehaviour
 
     private void SpawnSheep()
     {
-        Vector3 randomPosition = sheepSpawnPositions[Random.Range(0, sheepSpawnPositions.Count)].position; // 1
-        GameObject sheep = Instantiate(sheepPrefab, randomPosition, sheepPrefab.transform.rotation); // 2
-        sheepList.Add(sheep); // 3
-        sheep.GetComponent<Sheep>().SetSpawner(this); // 4
+        Vector3 randomPosition = sheepSpawnPositions[Random.Range(0, sheepSpawnPositions.Count)].position;
+        GameObject sheep = Instantiate(sheepPrefab, randomPosition, sheepPrefab.transform.rotation);
+        sheepList.Add(sheep);
+        sheep.GetComponent<Sheep>().SetSpawner(this);
     }
 
-    private IEnumerator SpawnRoutine() // 1
+    private IEnumerator SpawnRoutine() 
     {
-        while (canSpawn) // 2
+        while (canSpawn)
         {
-            SpawnSheep(); // 3
-            yield return new WaitForSeconds(timeBetweenSpawns); // 4
+            SpawnSheep();
+            yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }
 
@@ -48,7 +48,7 @@ public class SheepSpawner : MonoBehaviour
     {
         foreach (GameObject sheep in sheepList)
         {
-            Destroy(sheep); 
+            Destroy(sheep);
         }
 
         sheepList.Clear();
